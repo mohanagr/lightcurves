@@ -9,6 +9,7 @@ The program deals with [dot]fits files. IRAC captures multiple frames at a time 
 2. Make sure pip3 is installed.
 3. Run setup.py
 4. The Program can now be run by - ``./lightcurve.py ./Samples/r46467072/ch2/bcd`` Replace ``./Samples/r46467072/ch2/bcd`` with the path to the directory containing fits images for which lightcurve is to be plotted.
+5. After successfully running the program the output is stored in ``\home\username\outputs\``
 
 ## Samples
 All samples have been obtained from the Spitzer Heritage archive - http://sha.ipac.caltech.edu/applications/Spitzer/SHA/
