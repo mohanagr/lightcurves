@@ -1,0 +1,1911 @@
+ hdrupd8 vsn 1.6  A70821
+******************************************************************
+Executing IRAC science pipeline
+******************************************************************
+Pipeline executing sanity_datatype
+sanity_datatype -i ../fos16.fits -t1 cdf/sanity_datatype1.tbl -t2 cdf/sanity_datatype2.tbl -o1 qa/sanity_datatype1.tbl -o2 qa/sanity_datatype2.tbl 
+******************************************************************
+Program Sanity_datatype is started .... Version 1.0, Sat Jan  9 14:56:18 2016
+Input Image File = ../fos16.fits
+Input Data Table 1 = cdf/sanity_datatype1.tbl
+Input Data Table 2 = cdf/sanity_datatype2.tbl
+Output Filename1 = qa/sanity_datatype1.tbl
+Output Filename2 = qa/sanity_datatype2.tbl
+Log File = stdout
+I_Debug = 0
+I_Verbose = 0
+I_SuperVerbose = 0
+Processing time: 0.070000 seconds
+Program Sanity_datatype is done. Version 1.0, Sat Jan  9 14:56:19 2016
+
+
+sanity_datatype   exit_value =   0    execution_time = 0.400s
+******************************************************************
+Pipeline executing qatool
+qatool -i ../fos16.fits -n cdf/pn107.nl -nb QATOOLDCE -a /sos/sw/S19.2.0/STUDIO/downlink/include -o qa/DCE_qatool 
+******************************************************************
+qatool_parse_namelist: Information only: Namelist block-name = &QATOOLDCE
+Program qatool, Version 6.0
+Namelist File  = cdf/pn107.nl
+Input File = ../fos16.fits
+Output Data Filename Base = qa/DCE_qatool
+Statistics Group = 0
+Percent-Scaling Flag = 0
+Calculation Type = 1
+(set-up to do additional computations for four readout channels)
+Number of Mean Absolute Deviations for Histogram Half-Width Coverage = 5
+Number of Bins in Histograms = 41
+Central fraction for trimmed average = 0.810000
+Central fraction for trimmed std. dev. = 0.720000
+Bad-pixel tolerance fraction = 0.340000
+Statistics Box X position = 3
+Statistics Box Y position = 4
+Statistics Box X width = 27
+Statistics Box Y height = 33
+Input-Image Transpose Flag = 1
+Unsigned Integer Flag = 0
+Data-Plane Flag = 1
+Number Edge Rows/Cols Skipped = 10
+Keyword Prefix = dce
+Ancillary Data-File Path = /sos/sw/S19.2.0/STUDIO/downlink/include
+Verbose flag = 0
+Super-verbose flag = 0
+Debug flag = 0
+Performed statistical and histogram calculations.
+Program qatool: Status Message: 0x0000
+Normal exit from Function 0x0000: LOG_WRITER
+Processing time: 0.740000 seconds
+Current date/time: Sat Jan  9 14:56:20 2016
+Program qatool, version 6.0, terminated.
+
+qatool   exit_value =   0    execution_time = 0.830s
+******************************************************************
+Pipeline executing sanity_check
+sanity_check -i qa/DCE_qatool.tbl -o qa/sanity_check.tbl 
+******************************************************************
+Program Sanity_check is started .... Version 1.0, Sat Jan  9 14:56:23 2016
+
+Input File = qa/DCE_qatool.tbl
+Output = qa/sanity_check.tbl
+Processing time: 0.030000 seconds
+Current date/time: Sat Jan  9 14:56:23 2016
+Program Sanity_check, version 1.0, terminated.
+
+sanity_check   exit_value =   0    execution_time = 0.330s
+******************************************************************
+Pipeline executing abad_repair
+abad_repair -i ../fos16.fits -o abad_repair.fits 
+******************************************************************
+Pipeline Module ABAD_REPAIR Version 1.2
+Processing time Sat Jan  9 14:56:24 2016
+
+ABAD_READ_DATA: A0752D00 = 0
+status from read: 1
+npixs = 65536
+enter output with 0
+files ../fos16.fits !abad_repair.fits 
+open output [!abad_repair.fits]
+comment [Sat Jan  9 14:56:24 2016]
+Time = 0.040 seconds
+exit code 0
+
+abad_repair   exit_value =   0    execution_time = 0.090s
+******************************************************************
+Pipeline executing tranhead
+tranhead -i abad_repair.fits -n cdf/pn107.nl -k /scr/S19.2.0/cdf/ctd/telemetry_dictionary.dat -a /sos/sw/S19.2.0/STUDIO/downlink/include -o tranhead.fits -t, cdf/Keyword_Include_List.dat 
+******************************************************************
+
+Program tranhead, Version 13.2
+Namelist File  = cdf/pn107.nl
+Input File = abad_repair.fits
+Dictionary File = /scr/S19.2.0/cdf/ctd/telemetry_dictionary.dat
+CTD Version String = 3.0.94S
+Keyword-Include-List File = cdf/Keyword_Include_List.dat
+Translated-Keyword File = tranhead.hdr
+CSPICE leapseconds kernel = /scr/S19.2.0/cdf/spice/leapseconds.ker
+CSPICE SCLK_SCET kernel = /scr/S19.2.0/cdf/spice/sclk_scet.ker
+CSPICE Spitzer Ephemeris = /scr/S19.2.0/cdf/spice/sirtf.bsp
+CSPICE Planets Ephemeris = /scr/S19.2.0/cdf/spice/de.bsp
+Output File = tranhead.fits
+Operation Type = 1
+FITS-Header Comment Flag = 1
+SCLK correction factor = 1.000380
+Ignore Frames (1st) = -1
+Ignore Frames (2nd and higher) = -1
+Central fraction for trimmed average  = 0.900000
+Central fraction for trimmed std. dev. = 0.900000
+Gain = 3.710000
+Gain_RdOutCh_1 = 3.710000
+Gain_RdOutCh_2 = 3.710000
+Gain_RdOutCh_3 = 3.710000
+Gain_RdOutCh_4 = 3.710000
+Ancillary Data-File Path = /sos/sw/S19.2.0/STUDIO/downlink/include
+Verbose flag = 0
+Super-verbose flag = 0
+Debug flag = 0
+Configured to perform forward FITS keyword translation.
+tranhead Status Message: 0x0000
+Normal exit from Function 0x0000: LOG_WRITER
+A total of        0   NaN's were produced in the results.
+Processing time: 0.330000 seconds
+Current date/time: Sat Jan  9 14:56:25 2016
+Program tranhead, version 13.2, terminated.
+
+tranhead   exit_value =   0    execution_time = 0.430s
+ hdrupd8 vsn 1.6  A70821
+
+
+LabDark
+
+chan, frametime, hdy, extrpt = 2, 2.00, F, 233
+expid  adceid  repidx  =  176,  0,  0 
+
+SkyDarkaor template time = 2
+hdy  repidx =  F  0
+expid  ext-repeat  =  176  233
+
+******************************************************************
+Pipeline executing caltrans
+caltrans -n cdf/pn107.nl -m 2 -a 7 -b /scr2/S19.2.0/dlcaldata/irac -s tranhead.fits -o cal -u SUB -jk1 CHNLNUM -jv1 2 -ja1 N -ju1 0 -js1 flip -jk2 CHNLNUM;AFOWLNUM;AWAITPER;FRAMTIME;HDRMODE -jv2 2;8;184;2.00;F -ja2 N;N;N;N;S -ju2 0;0;0;0;0 -js2 sigma;cmask -jk3 CHNLNUM;AFOWLNUM;AWAITPER;FRAMTIME;HDRMODE -jv3 2;8;184;2.00;F -ja3 N;N;N;N;S -ju3 0;0;0;0;0 -js3 cmask -jk4 CHNLNUM -jv4 2 -ja4 N -ju4 0 -js4 cmask -jk5 CHNLNUM -jv5 2 -ja5 N -ju5 0 -js5 cmask -jk6 CHNLNUM -jv6 2 -ja6 N -ju6 0 -jk7 CHNLNUM;AFOWLNUM;AWAITPER -jv7 2;8;184 -ja7 N;N;N -ju7 0;0;0 -jk8 CHNLNUM;AFOWLNUM;AWAITPER -jv8 2;8;184 -ja8 N;N;N -ju8 0;0;0 -e CALTRANSsciSUB 
+******************************************************************
+
+Online Namelist file descriptor associated
+Online namelist buffer loaded: length = 7422
+
+Warning !:  Ancillary file #1  with full suffix filename  '/sos/archive/fallbacks/IRAC004600/SUB_2s_2sf8d1r1_ch2_v2.0.0_dark_sigma.fits'  NOT in archive/sandbox !!.
+Proceed to the next suffix fileprocessing .....
+
+Warning !:  Ancillary file #2  with full suffix filename  '/sos/archive/fallbacks/IRAC004600/SUB_2s_2sf8d1r1_ch2_v2.0.0_dark_cmask.fits'  NOT in archive/sandbox !!.
+Proceed to the next suffix fileprocessing .....
+
+Warning !:  Ancillary-suffix file #1: '/scr2/S19.2.0/dlcaldata/irac/fb1502_SUB_2s_2sf8d1r1_ch2_v2.0.0_dark_sigma.fits'  could NOT be identified on cache.
+Processing continues ..... 
+
+
+Warning !:  Ancillary-suffix file #2: '/scr2/S19.2.0/dlcaldata/irac/fb1502_SUB_2s_2sf8d1r1_ch2_v2.0.0_dark_cmask.fits'  could NOT be identified on cache.
+Processing continues ..... 
+
+
+Warning !:  Ancillary file #1  with full suffix filename  '/sos/archive/fallbacks/IRAC005300/lincal_b2_sa_011410_cmask.fits'  NOT in archive/sandbox !!.
+Proceed to the next suffix fileprocessing .....
+
+Warning !:  Ancillary-suffix file #1: '/scr2/S19.2.0/dlcaldata/irac/fb1579_lincal_b2_sa_011410_cmask.fits'  could NOT be identified on cache.
+Processing continues ..... 
+
+  Printing Log output to stdout...
+
+
+Program CALTRANS, Version 4.0
+Command-Line Namelist Filename  = cdf/pn107.nl
+Command-Line Namelist Section = CALTRANSsciSUB
+CalTrans Execution Mode  = 2
+CalID = 7
+Input Calibration Type list = pmask;labdark;skydark;lincal;sky_flat;fluxconv;muxbleed_lut;muxbleed_coeff
+Input Calibration Rule list = 0;0;300;0;0;0;0;0
+Input Generic Outfname list = pmask.fits;labdark.fits;skydark.fits;lincal.fits;skyflat.fits;fluxconv;muxbleed_lut;muxbleed_coeff
+Science DCE Filename = tranhead.fits
+CAL Destination Path = cal
+Processing time: 0.430000 seconds
+Current date/time: Sat Jan  9 14:56:40 2016
+Program CALTRANS, version 4.0, terminated with status = 16
+
+CalTrans exits with status = 16
+
+
+
+caltrans   exit_value =  16    execution_time = 0.560s
+******************************************************************
+Pipeline executing insbposdom
+insbposdom -i tranhead.fits -o insbposdom.fits 
+******************************************************************
+Pipeline Module INSBPOSDOM Version 1.1
+Processing time Sat Jan  9 14:56:41 2016
+
+Sat Jan  9 14:56:41 2016
+Time = 0.030 seconds
+exit code 0
+
+insbposdom   exit_value =   0    execution_time = 0.070s
+******************************************************************
+Pipeline executing cvti2r4
+cvti2r4 -i insbposdom.fits -a 0.5625 -b 0 -d cal/dmask_for_raw.fits -o cvti2r4.fits -m row 
+******************************************************************
+ SIRTF I*2-to-R*4 Data Cube Conversion program vsn 1.31 A61025
+ Input file:  insbposdom.fits
+ Using offset =    0.562500
+ Using BLANK-fill value:   0
+ Output file: cvti2r4.fits
+ Missing-data pattern specified as rows
+
+cvti2r4   exit_value =   0    execution_time = 0.330s
+Image has barrel shift = 3
+Computed truncation correction 0.5*(1-2^-ABARREL) = 0.5625
+******************************************************************
+Pipeline executing hdrupd8
+hdrupd8 cvti2r4.fits -a cdf/hdrupd8_cubify.dat -d cdf/hdrupd8_planify.dat 
+******************************************************************
+ hdrupd8 vsn 1.6  A70821
+ WARNING: keyword to be deleted not found: NAXIS3  
+
+hdrupd8   exit_value =   0    execution_time = 0.340s
+******************************************************************
+Pipeline executing hdrupd8
+hdrupd8 dmask.fits -a cdf/hdrupd8_cubify.dat -d cdf/hdrupd8_planify.dat 
+******************************************************************
+ hdrupd8 vsn 1.6  A70821
+ WARNING: keyword to be deleted not found: NAXIS3  
+
+hdrupd8   exit_value =   0    execution_time = 0.350s
+******************************************************************
+Pipeline executing iracwrapdet1
+iracwrapdet1 -i cvti2r4.fits -n cdf/pn107.nl -p cal/pmask.fits -d dmask.fits -w wmask.fits -v 
+******************************************************************
+Pipeline Module IRACWRAPDET1 Version 1.4
+Processing time Sat Jan  9 14:56:52 2016
+iracwrapdet1_parse_args: Namelist File = 	cdf/pn107.nl
+iracwrapdet1_parse_args: Pmask File = 	cal/pmask.fits
+iracwrapdet1_parse_args: Dmask File = 	dmask.fits
+iracwrapdet1_parse_args: Wmask File = 	wmask.fits
+iracwrapdet1_parse_args: Input File = 	cvti2r4.fits
+iracwrapdet1_parse_args: I_Verbose = 			1
+chn 2 framtim 2.000000
+iracwrapdet1_read_data: Data read from file:
+cvti2r4.fits
+iracwrapdet1_read_data: I_NX = 32
+iracwrapdet1_read_data: I_NY = 32
+iracwrapdet1_read_data: I_NZ = 64
+iracwrapdet1_parse_namelist: Namelist File = 	cdf/pn107.nl
+Coeff used: 55000.000000 55000.000000 55000.000000 55000.000000
+iracwrapdet1_compute_results: Numerical Computations finished
+Sat Jan  9 14:56:52 2016
+iracwrapdet1_output: Results written to file(s).
+Time = 0.020 seconds
+iracwrapdet1_error_handler: Error Handler finished.
+iracwrapdet1_exit: Memory Deallocated.
+exit code 0
+
+iracwrapdet1   exit_value =   0    execution_time = 0.060s
+******************************************************************
+Pipeline executing iracwrapdet2
+iracwrapdet2 -i cvti2r4.fits -n cdf/pn107.nl -p cal/pmask.fits -d dmask.fits -w wmask.fits -a /sos/sw/S19.2.0/STUDIO/downlink/include 
+******************************************************************
+
+Program iracwrapdet2, Version 1.4
+Namelist File  = cdf/pn107.nl
+FITS Input Image = cvti2r4.fits
+Pmask File = cal/pmask.fits
+Dmask File = dmask.fits
+Wmask File = mask.fits
+M-Level       chan1     chan2     chan3     chan4
+            55000.0   55000.0   55000.0   55000.0
+Tolerance     chan1     chan2     chan3     chan4
+             1200.0    1200.0    1200.0    1200.0
+Pmask Maximum = 65535
+Dmask Maximum = 65535
+Ancillary Data-File Path = /sos/sw/S19.2.0/STUDIO/downlink/include
+Verbose flag = 0
+Super-verbose flag = 0
+Debug flag = 0
+iracwrapdet2 Status Message      0x0000
+Normal exit from Function 0x0000: LOG_WRITER
+Processing time: 0.110000 seconds
+Current date/time: Sat Jan  9 14:56:52 2016
+Program iracwrapdet2, version 1.4, terminated
+
+
+iracwrapdet2   exit_value =   0    execution_time = 0.150s
+******************************************************************
+Pipeline executing iracwrapcorr
+iracwrapcorr -i cvti2r4.fits -p cal/pmask.fits -d dmask.fits -w wmask.fits -o iracwrapcorr.fits 
+******************************************************************
+Pipeline Module IRACWRAPCORR Version 1.3
+Processing time Sat Jan  9 14:56:53 2016
+iracwrapcorr_parse_namelist: Information only: Namelist not specified.
+Sat Jan  9 14:56:53 2016
+Time = 0.050 seconds
+exit code 0
+
+iracwrapcorr   exit_value =   0    execution_time = 0.090s
+******************************************************************
+Pipeline executing iracnorm
+iracnorm -i iracwrapcorr.fits -p cal/pmask.fits -d dmask.fits -o iracnorm.fits 
+******************************************************************
+Pipeline Module IRACWNORM Version 1.10
+Processing time Sat Jan  9 14:56:53 2016
+
+Sat Jan  9 14:56:53 2016
+Time = 0.040 seconds
+exit code 0
+
+iracnorm   exit_value =   0    execution_time = 0.080s
+******************************************************************
+Pipeline executing iracebwc
+iracebwc -i iracnorm.fits -n cdf/pn107.nl -p cal/pmask.fits -d dmask.fits -o iracebwc.fits 
+******************************************************************
+Pipeline Module IRACEBWC Version 1.2
+Processing time Sat Jan  9 14:56:54 2016
+
+Sat Jan  9 14:56:54 2016
+Time = 0.040 seconds
+exit code 0
+
+iracebwc   exit_value =   0    execution_time = 0.090s
+HDR mode   =  f
+AOR Template Time     =  2
+DCE Frame Time    =  2.00
+EXTRpt     =  233
+Frame NOBF =  0
+From sub determine_delays:
+   aottime = 2
+   aordelay = 222.190359962807
+   stellarmode = f
+   expid=176
+imdly = 1.35135997615814
+frmdly = 1.35135997615814
+
+Immed  Delay = 1.35135997615814
+Frame  Delay = 1.35135997615814
+
+ hdrupd8 vsn 1.6  A70821
+ hdrupd8 vsn 1.6  A70821
+ hdrupd8 vsn 1.6  A70821
+ hdrupd8 vsn 1.6  A70821
+ hdrupd8 vsn 1.6  A70821
+ hdrupd8 vsn 1.6  A70821
+ hdrupd8 vsn 1.6  A70821
+******************************************************************
+Pipeline executing darksubng
+darksubng -i iracebwc.fits -a /sos/sw/S19.2.0/STUDIO/downlink/include -p cal/pmask.fits -d dmask.fits -o labdarksub.fits -cc cal/labdark.fits -v 
+******************************************************************
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: namelist not given
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: input uncertainty image not given
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: output uncertainty image not given
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: WARNING no uncertainty calculations will be performed
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: Namelist               = []
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: Input image            = [iracebwc.fits]
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: Input uncertainty      = []
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: Output image           = [!labdarksub.fits]
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: Output uncertainty     = []
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: Dark                   = [cal/labdark.fits]
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: Pmask file             = [cal/pmask.fits]
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: Pmask fatality bitmask = [65536]
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: Dmask file             = [dmask.fits]
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: Dmask fatality bitmask = [65536]
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: Cmask file             = []
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: Cmask fatality bitmask = [65536]
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: Logfile                = []
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: Ancillary Path         = [/sos/sw/S19.2.0/STUDIO/downlink/include]
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: Uncertainty calculations will not be made
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: WARNING cal/labdark.fits has no BUNIT key
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: WARNING assuming cal/labdark.fits is in DN
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: WARNING cal/labdark.fits has no EXPTIME key
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: WARNING cal/labdark.fits has no GAIN keywords
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: compute - performing any unit conversions
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: compute - starting subtraction with masking 
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: Processing successful; Exiting
+
+darksubng   exit_value =   0    execution_time = 0.150s
+READ Noise !! =  9.4
+******************************************************************
+Pipeline executing snestimator
+snestimator -i labdarksub.fits -n cdf/pn107.nl -a /sos/sw/S19.2.0/STUDIO/downlink/include -p cal/pmask.fits -d dmask.fits -on sig_snestimator.fits -g 3.71 -r 9.4 
+******************************************************************
+verbose 0
+
+Program SNESTIMATOR, Version 1.5
+Namelist File  = cdf/pn107.nl
+Input FITS Image = labdarksub.fits
+Noise Image = sig_snestimator.fits
+Denominator type = IRAC_MODEL
+Edge Pixels Excluded = 0
+Gain Channel 1 = 3.710000 Channel 2 = 3.710000 Channel 3 = 3.710000 Channel 4 = 3.710000
+Read Noise = 9.400000
+Confusion Sigma = 0.000000
+Ancillary Data-File Path = /sos/sw/S19.2.0/STUDIO/downlink/include
+Verbose flag = 0
+Super-verbose flag = 0
+Debug flag = 0
+snestimator Status Message      0x0000
+Normal exit from Function 0x0000: LOG_WRITER
+Processing time: 0.100000 seconds
+Current date/time: Sat Jan  9 14:57:24 2016
+Program SNESTIMATOR, version 1.5, terminated
+
+
+snestimator   exit_value =   0    execution_time = 0.160s
+******************************************************************
+Pipeline executing darksubng
+darksubng -i iracebwc.fits -iu sig_snestimator.fits -a /sos/sw/S19.2.0/STUDIO/downlink/include -p cal/pmask.fits -d dmask.fits -o labdarksub.fits -ou sig_labdarksub.fits -cc cal/labdark.fits -v 
+******************************************************************
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: namelist not given
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: Namelist               = []
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: Input image            = [iracebwc.fits]
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: Input uncertainty      = [sig_snestimator.fits]
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: Output image           = [!labdarksub.fits]
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: Output uncertainty     = [!sig_labdarksub.fits]
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: Dark                   = [cal/labdark.fits]
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: Pmask file             = [cal/pmask.fits]
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: Pmask fatality bitmask = [65536]
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: Dmask file             = [dmask.fits]
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: Dmask fatality bitmask = [65536]
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: Cmask file             = []
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: Cmask fatality bitmask = [65536]
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: Logfile                = []
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: Ancillary Path         = [/sos/sw/S19.2.0/STUDIO/downlink/include]
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: Uncertainty calculations will be made
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: WARNING cal/labdark.fits has no BUNIT key
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: WARNING assuming cal/labdark.fits is in DN
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: WARNING cal/labdark.fits has no EXPTIME key
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: WARNING cal/labdark.fits has no GAIN keywords
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: compute - performing any unit conversions
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: compute - starting subtraction with masking 
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: Processing successful; Exiting
+
+darksubng   exit_value =   0    execution_time = 0.180s
+******************************************************************
+Pipeline executing fowlinearize
+fowlinearize -i1 labdarksub.fits -i3 sig_labdarksub.fits -n cdf/pn107.nl -a /sos/sw/S19.2.0/STUDIO/downlink/include -ip cal/pmask.fits -i2 cal/lincal.fits -id dmask.fits -o1 fowlinearize.fits -o2 sig_fowlinearize.fits -c 10 
+******************************************************************
+
+Program FOWLINEARIZE, Version 4.9
+Namelist File  = cdf/pn107.nl
+Input File 1 = labdarksub.fits
+Input File 2 = cal/lincal.fits
+Input File 3 = sig_labdarksub.fits
+Model_Flag(1=quad. 2=cubic) = 1
+Clock_Readout(10=sub-array, 200=full-array) = 10.000000
+Input PMask Image = cal/pmask.fits
+Unusable PMask Bits = 16384
+Input DMask Image = dmask.fits
+Unusable DMask Bits = 8192
+Not-linearized DMask Bit = 4096
+Not-linearized DMask Bit due to lincal-model saturation = 8192
+Output File 1 = fowlinearize.fits
+Output File 2 = sig_fowlinearize.fits
+Ancillary Data-File Path = /sos/sw/S19.2.0/STUDIO/downlink/include
+Verbose flag = 0
+Super-verbose flag = 0
+Debug flag = 0
+Performed linearity correction.
+Program fowlinearize: Status Message: 0x0000
+Normal exit from Function 0x0000: LOG_WRITER
+Processing time: 0.280000 seconds
+Current date/time: Sat Jan  9 14:57:25 2016
+Program FOWLINEARIZE, version 4.9, terminated.
+
+fowlinearize   exit_value =   0    execution_time = 0.380s
+Read Noise =  9.4
+ hdrupd8 vsn 1.6  A70821
+******************************************************************
+Pipeline executing bgmodel
+bgmodel -i fowlinearize.fits -n cdf/pn107.nl -h 
+******************************************************************
+
+Online Namelist file descriptor associated
+Online namelist buffer loaded: length = 7422
+bgmodel_log_writer: Printing Log output to stdout
+bgmodel  Version 1.0
+Namelist File  = cdf/pn107.nl
+Input Image = fowlinearize.fits
+Ephemeris = /scr2/S19.2.0/cdf/spice/sirtf.bsp
+LeapSec Kernel = /scr2/S19.2.0/cdf/spice/leapseconds.ker
+SPK Kernel = /scr2/S19.2.0/cdf/spice/de.bsp
+
+bgmodel  Status Message      0x0000: No error.
+Time = 0.070 seconds
+
+Background exits with status = 0
+
+
+bgmodel   exit_value =   0    execution_time = 0.150s
+******************************************************************
+Pipeline executing hdrupd8
+hdrupd8 fowlinearize.fits -a addkeys.dat 
+******************************************************************
+ hdrupd8 vsn 1.6  A70821
+
+hdrupd8   exit_value =   0    execution_time = 0.460s
+SkyDk Med DN      = 16.56367 
+Exposure time     = 1.92
+SkyDk Med DN rate = 8.62691145833333
+Flux Conv         = 0.1447 
+SkyDk Med Flux    = 1.24831408802083
+Image File = fowlinearize.fits 
+
+ hdrupd8 vsn 1.6  A70821
+ hdrupd8 vsn 1.6  A70821
+ hdrupd8 vsn 1.6  A70821
+ hdrupd8 vsn 1.6  A70821
+ hdrupd8 vsn 1.6  A70821
+******************************************************************
+Pipeline executing darksubng
+darksubng -i fowlinearize.fits -iu sig_fowlinearize.fits -a /sos/sw/S19.2.0/STUDIO/downlink/include -p cal/pmask.fits -d dmask.fits -o skydarksub.fits -ou sig_skydarksub.fits -cc cal/skydark.fits -v -c cal/skydark_cmask.fits 
+******************************************************************
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: namelist not given
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: Namelist               = []
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: Input image            = [fowlinearize.fits]
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: Input uncertainty      = [sig_fowlinearize.fits]
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: Output image           = [!skydarksub.fits]
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: Output uncertainty     = [!sig_skydarksub.fits]
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: Dark                   = [cal/skydark.fits]
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: Pmask file             = [cal/pmask.fits]
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: Pmask fatality bitmask = [65536]
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: Dmask file             = [dmask.fits]
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: Dmask fatality bitmask = [65536]
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: Cmask file             = [cal/skydark_cmask.fits]
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: Cmask fatality bitmask = [65536]
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: Logfile                = []
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: Ancillary Path         = [/sos/sw/S19.2.0/STUDIO/downlink/include]
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: Uncertainty calculations will be made
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: compute - performing any unit conversions
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: compute - starting subtraction with masking 
+/sos/sw/S19.2.0/STUDIO/downlink/bin/darksubng: Processing successful; Exiting
+
+darksubng   exit_value =   0    execution_time = 0.200s
+******************************************************************
+Pipeline executing darkdrift
+darkdrift -i skydarksub.fits -iu sig_skydarksub.fits -n cdf/pn107.nl -a /sos/sw/S19.2.0/STUDIO/downlink/include -o1 darkdrift.fits -o2 darkdriftcorr.fits -o3 darkdrift.tbl -ou sig_darkdrift.fits 
+******************************************************************
+Program darkdrift, Version 4.1
+Namelist File  = cdf/pn107.nl
+Input Image = skydarksub.fits
+Input Uncertainty Image = sig_skydarksub.fits
+Output Image 1 (corrected image) = darkdrift.fits
+Output Image 2 (corrections) = darkdriftcorr.fits
+Output Image 3 (uncertainties) = sig_darkdrift.fits
+Output File 3 = darkdrift.tbl
+Central fraction for trimmed average  = 0.900000
+Central fraction for trimmed std. dev. = 0.900000
+Time_Input = 0.250000
+Time_Before = 0.000000
+Time_After = 1.000000
+Temp_Input = 270.000000
+Temp_Before = 280.000000
+Temp_After = 260.000000
+Calculation Type = 1
+Input-Image Transpose Flag = 1
+Multiplicative-Correction Flag (Additive if zero) = 0
+Readout Channel to exclude (none if zero) = 0
+Data-Plane Flag = 1
+Ancillary Data-File Path = /sos/sw/S19.2.0/STUDIO/downlink/include
+Verbose flag = 0
+Super-verbose flag = 0
+Debug flag = 0
+Dark-current offsets estimated from input image.
+
+Detailed darkdrift calculational results:
+...for data plane = 1
+Darkdrift correction for readout-channel 1 = -0.058585
+Darkdrift correction for readout-channel 2 = 0.228907
+Darkdrift correction for readout-channel 3 = -0.009375
+Darkdrift correction for readout-channel 4 = -0.160947
+Darkdrift uncertainty for readout-channel 1 = 0.302200
+Darkdrift uncertainty for readout-channel 2 = 0.302172
+Darkdrift uncertainty for readout-channel 3 = 0.301278
+Darkdrift uncertainty for readout-channel 4 = 0.301330
+Trimmed average of values in readout-channel 1 = 7.625680
+Trimmed average of values in readout-channel 2 = 7.913172
+Trimmed average of values in readout-channel 3 = 7.674890
+Trimmed average of values in readout-channel 4 = 7.523318
+Darkdrift background term = 7.684265
+...for data plane = 2
+Darkdrift correction for readout-channel 1 = 0.158613
+Darkdrift correction for readout-channel 2 = -0.274979
+Darkdrift correction for readout-channel 3 = 0.011466
+Darkdrift correction for readout-channel 4 = 0.104900
+Darkdrift uncertainty for readout-channel 1 = 0.303596
+Darkdrift uncertainty for readout-channel 2 = 0.299682
+Darkdrift uncertainty for readout-channel 3 = 0.304182
+Darkdrift uncertainty for readout-channel 4 = 0.302987
+Trimmed average of values in readout-channel 1 = 5.105903
+Trimmed average of values in readout-channel 2 = 4.672311
+Trimmed average of values in readout-channel 3 = 4.958755
+Trimmed average of values in readout-channel 4 = 5.052190
+Darkdrift background term = 4.947290
+...for data plane = 3
+Darkdrift correction for readout-channel 1 = 0.082583
+Darkdrift correction for readout-channel 2 = -0.264954
+Darkdrift correction for readout-channel 3 = 0.182390
+Darkdrift correction for readout-channel 4 = -0.000019
+Darkdrift uncertainty for readout-channel 1 = 0.302965
+Darkdrift uncertainty for readout-channel 2 = 0.303804
+Darkdrift uncertainty for readout-channel 3 = 0.303152
+Darkdrift uncertainty for readout-channel 4 = 0.376706
+Trimmed average of values in readout-channel 1 = 4.930932
+Trimmed average of values in readout-channel 2 = 4.583395
+Trimmed average of values in readout-channel 3 = 5.030739
+Trimmed average of values in readout-channel 4 = 4.848329
+Darkdrift background term = 4.848349
+...for data plane = 4
+Darkdrift correction for readout-channel 1 = -0.355877
+Darkdrift correction for readout-channel 2 = 0.140242
+Darkdrift correction for readout-channel 3 = -0.098184
+Darkdrift correction for readout-channel 4 = 0.313820
+Darkdrift uncertainty for readout-channel 1 = 0.303105
+Darkdrift uncertainty for readout-channel 2 = 0.304345
+Darkdrift uncertainty for readout-channel 3 = 0.303631
+Darkdrift uncertainty for readout-channel 4 = 0.303314
+Trimmed average of values in readout-channel 1 = 5.020866
+Trimmed average of values in readout-channel 2 = 5.516985
+Trimmed average of values in readout-channel 3 = 5.278559
+Trimmed average of values in readout-channel 4 = 5.690563
+Darkdrift background term = 5.376743
+...for data plane = 5
+Darkdrift correction for readout-channel 1 = -0.396412
+Darkdrift correction for readout-channel 2 = -0.417323
+Darkdrift correction for readout-channel 3 = 0.612581
+Darkdrift correction for readout-channel 4 = 0.201154
+Darkdrift uncertainty for readout-channel 1 = 0.302856
+Darkdrift uncertainty for readout-channel 2 = 0.302973
+Darkdrift uncertainty for readout-channel 3 = 0.303057
+Darkdrift uncertainty for readout-channel 4 = 0.378720
+Trimmed average of values in readout-channel 1 = 5.546828
+Trimmed average of values in readout-channel 2 = 5.525917
+Trimmed average of values in readout-channel 3 = 6.555822
+Trimmed average of values in readout-channel 4 = 6.144394
+Darkdrift background term = 5.943240
+...for data plane = 6
+Darkdrift correction for readout-channel 1 = -0.053252
+Darkdrift correction for readout-channel 2 = 0.129705
+Darkdrift correction for readout-channel 3 = -0.187002
+Darkdrift correction for readout-channel 4 = 0.110550
+Darkdrift uncertainty for readout-channel 1 = 0.302975
+Darkdrift uncertainty for readout-channel 2 = 0.378446
+Darkdrift uncertainty for readout-channel 3 = 0.302977
+Darkdrift uncertainty for readout-channel 4 = 0.302975
+Trimmed average of values in readout-channel 1 = 5.554900
+Trimmed average of values in readout-channel 2 = 5.737857
+Trimmed average of values in readout-channel 3 = 5.421151
+Trimmed average of values in readout-channel 4 = 5.718702
+Darkdrift background term = 5.608152
+...for data plane = 7
+Darkdrift correction for readout-channel 1 = 0.007003
+Darkdrift correction for readout-channel 2 = -0.235222
+Darkdrift correction for readout-channel 3 = 0.180229
+Darkdrift correction for readout-channel 4 = 0.047990
+Darkdrift uncertainty for readout-channel 1 = 0.303355
+Darkdrift uncertainty for readout-channel 2 = 0.303544
+Darkdrift uncertainty for readout-channel 3 = 0.303311
+Darkdrift uncertainty for readout-channel 4 = 0.303065
+Trimmed average of values in readout-channel 1 = 5.683321
+Trimmed average of values in readout-channel 2 = 5.441096
+Trimmed average of values in readout-channel 3 = 5.856547
+Trimmed average of values in readout-channel 4 = 5.724308
+Darkdrift background term = 5.676318
+...for data plane = 8
+Darkdrift correction for readout-channel 1 = 0.547140
+Darkdrift correction for readout-channel 2 = -0.303910
+Darkdrift correction for readout-channel 3 = -0.396595
+Darkdrift correction for readout-channel 4 = 0.153365
+Darkdrift uncertainty for readout-channel 1 = 0.302980
+Darkdrift uncertainty for readout-channel 2 = 0.302979
+Darkdrift uncertainty for readout-channel 3 = 0.302985
+Darkdrift uncertainty for readout-channel 4 = 0.303045
+Trimmed average of values in readout-channel 1 = 6.139815
+Trimmed average of values in readout-channel 2 = 5.288766
+Trimmed average of values in readout-channel 3 = 5.196081
+Trimmed average of values in readout-channel 4 = 5.746040
+Darkdrift background term = 5.592675
+...for data plane = 9
+Darkdrift correction for readout-channel 1 = -0.158298
+Darkdrift correction for readout-channel 2 = -0.166708
+Darkdrift correction for readout-channel 3 = 0.541203
+Darkdrift correction for readout-channel 4 = -0.216197
+Darkdrift uncertainty for readout-channel 1 = 0.302972
+Darkdrift uncertainty for readout-channel 2 = 0.304365
+Darkdrift uncertainty for readout-channel 3 = 0.303472
+Darkdrift uncertainty for readout-channel 4 = 0.302974
+Trimmed average of values in readout-channel 1 = 5.246607
+Trimmed average of values in readout-channel 2 = 5.238197
+Trimmed average of values in readout-channel 3 = 5.946108
+Trimmed average of values in readout-channel 4 = 5.188708
+Darkdrift background term = 5.404905
+...for data plane = 10
+Darkdrift correction for readout-channel 1 = 0.101043
+Darkdrift correction for readout-channel 2 = 0.019854
+Darkdrift correction for readout-channel 3 = 0.024702
+Darkdrift correction for readout-channel 4 = -0.145599
+Darkdrift uncertainty for readout-channel 1 = 0.303620
+Darkdrift uncertainty for readout-channel 2 = 0.302414
+Darkdrift uncertainty for readout-channel 3 = 0.302965
+Darkdrift uncertainty for readout-channel 4 = 0.302961
+Trimmed average of values in readout-channel 1 = 6.254431
+Trimmed average of values in readout-channel 2 = 6.173241
+Trimmed average of values in readout-channel 3 = 6.178090
+Trimmed average of values in readout-channel 4 = 6.007789
+Darkdrift background term = 6.153388
+...for data plane = 11
+Darkdrift correction for readout-channel 1 = 0.182988
+Darkdrift correction for readout-channel 2 = -0.183213
+Darkdrift correction for readout-channel 3 = -0.229685
+Darkdrift correction for readout-channel 4 = 0.229909
+Darkdrift uncertainty for readout-channel 1 = 0.303104
+Darkdrift uncertainty for readout-channel 2 = 0.302701
+Darkdrift uncertainty for readout-channel 3 = 0.303047
+Darkdrift uncertainty for readout-channel 4 = 0.302713
+Trimmed average of values in readout-channel 1 = 6.286958
+Trimmed average of values in readout-channel 2 = 5.920757
+Trimmed average of values in readout-channel 3 = 5.874285
+Trimmed average of values in readout-channel 4 = 6.333879
+Darkdrift background term = 6.103970
+...for data plane = 12
+Darkdrift correction for readout-channel 1 = 0.388175
+Darkdrift correction for readout-channel 2 = -0.197396
+Darkdrift correction for readout-channel 3 = 0.208477
+Darkdrift correction for readout-channel 4 = -0.399257
+Darkdrift uncertainty for readout-channel 1 = 0.302971
+Darkdrift uncertainty for readout-channel 2 = 0.302436
+Darkdrift uncertainty for readout-channel 3 = 0.302992
+Darkdrift uncertainty for readout-channel 4 = 0.302987
+Trimmed average of values in readout-channel 1 = 6.424887
+Trimmed average of values in readout-channel 2 = 5.839316
+Trimmed average of values in readout-channel 3 = 6.245189
+Trimmed average of values in readout-channel 4 = 5.637455
+Darkdrift background term = 6.036712
+...for data plane = 13
+Darkdrift correction for readout-channel 1 = -0.365203
+Darkdrift correction for readout-channel 2 = -0.126545
+Darkdrift correction for readout-channel 3 = 0.037753
+Darkdrift correction for readout-channel 4 = 0.453995
+Darkdrift uncertainty for readout-channel 1 = 0.302964
+Darkdrift uncertainty for readout-channel 2 = 0.302156
+Darkdrift uncertainty for readout-channel 3 = 0.303054
+Darkdrift uncertainty for readout-channel 4 = 0.303215
+Trimmed average of values in readout-channel 1 = 5.484711
+Trimmed average of values in readout-channel 2 = 5.723369
+Trimmed average of values in readout-channel 3 = 5.887667
+Trimmed average of values in readout-channel 4 = 6.303909
+Darkdrift background term = 5.849914
+...for data plane = 14
+Darkdrift correction for readout-channel 1 = -0.025811
+Darkdrift correction for readout-channel 2 = -0.113431
+Darkdrift correction for readout-channel 3 = 0.320851
+Darkdrift correction for readout-channel 4 = -0.181609
+Darkdrift uncertainty for readout-channel 1 = 0.303091
+Darkdrift uncertainty for readout-channel 2 = 0.304908
+Darkdrift uncertainty for readout-channel 3 = 0.303302
+Darkdrift uncertainty for readout-channel 4 = 0.303310
+Trimmed average of values in readout-channel 1 = 5.731238
+Trimmed average of values in readout-channel 2 = 5.643618
+Trimmed average of values in readout-channel 3 = 6.077901
+Trimmed average of values in readout-channel 4 = 5.575440
+Darkdrift background term = 5.757049
+...for data plane = 15
+Darkdrift correction for readout-channel 1 = -0.019677
+Darkdrift correction for readout-channel 2 = 0.181951
+Darkdrift correction for readout-channel 3 = -0.471710
+Darkdrift correction for readout-channel 4 = 0.309435
+Darkdrift uncertainty for readout-channel 1 = 0.302971
+Darkdrift uncertainty for readout-channel 2 = 0.302977
+Darkdrift uncertainty for readout-channel 3 = 0.378645
+Darkdrift uncertainty for readout-channel 4 = 0.302887
+Trimmed average of values in readout-channel 1 = 5.991732
+Trimmed average of values in readout-channel 2 = 6.193359
+Trimmed average of values in readout-channel 3 = 5.539699
+Trimmed average of values in readout-channel 4 = 6.320844
+Darkdrift background term = 6.011408
+...for data plane = 16
+Darkdrift correction for readout-channel 1 = 0.217516
+Darkdrift correction for readout-channel 2 = -0.276901
+Darkdrift correction for readout-channel 3 = -0.149543
+Darkdrift correction for readout-channel 4 = 0.208929
+Darkdrift uncertainty for readout-channel 1 = 0.303617
+Darkdrift uncertainty for readout-channel 2 = 0.302995
+Darkdrift uncertainty for readout-channel 3 = 0.302894
+Darkdrift uncertainty for readout-channel 4 = 0.303639
+Trimmed average of values in readout-channel 1 = 6.096408
+Trimmed average of values in readout-channel 2 = 5.601991
+Trimmed average of values in readout-channel 3 = 5.729349
+Trimmed average of values in readout-channel 4 = 6.087821
+Darkdrift background term = 5.878892
+...for data plane = 17
+Darkdrift correction for readout-channel 1 = -0.180991
+Darkdrift correction for readout-channel 2 = -0.475204
+Darkdrift correction for readout-channel 3 = 0.348666
+Darkdrift correction for readout-channel 4 = 0.307529
+Darkdrift uncertainty for readout-channel 1 = 0.303105
+Darkdrift uncertainty for readout-channel 2 = 0.302975
+Darkdrift uncertainty for readout-channel 3 = 0.302974
+Darkdrift uncertainty for readout-channel 4 = 0.303058
+Trimmed average of values in readout-channel 1 = 5.670917
+Trimmed average of values in readout-channel 2 = 5.376703
+Trimmed average of values in readout-channel 3 = 6.200574
+Trimmed average of values in readout-channel 4 = 6.159437
+Darkdrift background term = 5.851908
+...for data plane = 18
+Darkdrift correction for readout-channel 1 = -0.073350
+Darkdrift correction for readout-channel 2 = 0.145519
+Darkdrift correction for readout-channel 3 = 0.029654
+Darkdrift correction for readout-channel 4 = -0.101824
+Darkdrift uncertainty for readout-channel 1 = 0.373580
+Darkdrift uncertainty for readout-channel 2 = 0.302977
+Darkdrift uncertainty for readout-channel 3 = 0.302975
+Darkdrift uncertainty for readout-channel 4 = 0.303905
+Trimmed average of values in readout-channel 1 = 5.242997
+Trimmed average of values in readout-channel 2 = 5.461865
+Trimmed average of values in readout-channel 3 = 5.346001
+Trimmed average of values in readout-channel 4 = 5.214523
+Darkdrift background term = 5.316346
+...for data plane = 19
+Darkdrift correction for readout-channel 1 = 0.183642
+Darkdrift correction for readout-channel 2 = 0.086752
+Darkdrift correction for readout-channel 3 = -0.362753
+Darkdrift correction for readout-channel 4 = 0.092358
+Darkdrift uncertainty for readout-channel 1 = 0.302985
+Darkdrift uncertainty for readout-channel 2 = 0.303247
+Darkdrift uncertainty for readout-channel 3 = 0.303122
+Darkdrift uncertainty for readout-channel 4 = 0.377958
+Trimmed average of values in readout-channel 1 = 5.931060
+Trimmed average of values in readout-channel 2 = 5.834170
+Trimmed average of values in readout-channel 3 = 5.384665
+Trimmed average of values in readout-channel 4 = 5.839776
+Darkdrift background term = 5.747418
+...for data plane = 20
+Darkdrift correction for readout-channel 1 = -0.082121
+Darkdrift correction for readout-channel 2 = -0.139808
+Darkdrift correction for readout-channel 3 = 0.202001
+Darkdrift correction for readout-channel 4 = 0.019928
+Darkdrift uncertainty for readout-channel 1 = 0.303871
+Darkdrift uncertainty for readout-channel 2 = 0.304364
+Darkdrift uncertainty for readout-channel 3 = 0.302888
+Darkdrift uncertainty for readout-channel 4 = 0.302973
+Trimmed average of values in readout-channel 1 = 5.787284
+Trimmed average of values in readout-channel 2 = 5.729598
+Trimmed average of values in readout-channel 3 = 6.071406
+Trimmed average of values in readout-channel 4 = 5.889333
+Darkdrift background term = 5.869405
+...for data plane = 21
+Darkdrift correction for readout-channel 1 = 0.095793
+Darkdrift correction for readout-channel 2 = -0.394862
+Darkdrift correction for readout-channel 3 = 0.289964
+Darkdrift correction for readout-channel 4 = 0.009106
+Darkdrift uncertainty for readout-channel 1 = 0.303361
+Darkdrift uncertainty for readout-channel 2 = 0.303790
+Darkdrift uncertainty for readout-channel 3 = 0.303295
+Darkdrift uncertainty for readout-channel 4 = 0.303071
+Trimmed average of values in readout-channel 1 = 6.567319
+Trimmed average of values in readout-channel 2 = 6.076663
+Trimmed average of values in readout-channel 3 = 6.761490
+Trimmed average of values in readout-channel 4 = 6.480632
+Darkdrift background term = 6.471526
+...for data plane = 22
+Darkdrift correction for readout-channel 1 = -0.233468
+Darkdrift correction for readout-channel 2 = 0.129800
+Darkdrift correction for readout-channel 3 = 0.225148
+Darkdrift correction for readout-channel 4 = -0.121480
+Darkdrift uncertainty for readout-channel 1 = 0.302996
+Darkdrift uncertainty for readout-channel 2 = 0.303797
+Darkdrift uncertainty for readout-channel 3 = 0.302981
+Darkdrift uncertainty for readout-channel 4 = 0.302893
+Trimmed average of values in readout-channel 1 = 5.560869
+Trimmed average of values in readout-channel 2 = 5.924137
+Trimmed average of values in readout-channel 3 = 6.019485
+Trimmed average of values in readout-channel 4 = 5.672857
+Darkdrift background term = 5.794337
+...for data plane = 23
+Darkdrift correction for readout-channel 1 = 0.022346
+Darkdrift correction for readout-channel 2 = 0.145344
+Darkdrift correction for readout-channel 3 = 0.066515
+Darkdrift correction for readout-channel 4 = -0.234205
+Darkdrift uncertainty for readout-channel 1 = 0.303452
+Darkdrift uncertainty for readout-channel 2 = 0.302962
+Darkdrift uncertainty for readout-channel 3 = 0.297982
+Darkdrift uncertainty for readout-channel 4 = 0.302997
+Trimmed average of values in readout-channel 1 = 5.729899
+Trimmed average of values in readout-channel 2 = 5.852897
+Trimmed average of values in readout-channel 3 = 5.774067
+Trimmed average of values in readout-channel 4 = 5.473348
+Darkdrift background term = 5.707553
+...for data plane = 24
+Darkdrift correction for readout-channel 1 = -0.210649
+Darkdrift correction for readout-channel 2 = -0.320399
+Darkdrift correction for readout-channel 3 = 0.329205
+Darkdrift correction for readout-channel 4 = 0.201843
+Darkdrift uncertainty for readout-channel 1 = 0.228271
+Darkdrift uncertainty for readout-channel 2 = 0.303788
+Darkdrift uncertainty for readout-channel 3 = 0.302979
+Darkdrift uncertainty for readout-channel 4 = 0.302977
+Trimmed average of values in readout-channel 1 = 5.570563
+Trimmed average of values in readout-channel 2 = 5.460813
+Trimmed average of values in readout-channel 3 = 6.110417
+Trimmed average of values in readout-channel 4 = 5.983055
+Darkdrift background term = 5.781212
+...for data plane = 25
+Darkdrift correction for readout-channel 1 = -0.038801
+Darkdrift correction for readout-channel 2 = 0.042306
+Darkdrift correction for readout-channel 3 = -0.151682
+Darkdrift correction for readout-channel 4 = 0.148177
+Darkdrift uncertainty for readout-channel 1 = 0.303977
+Darkdrift uncertainty for readout-channel 2 = 0.305173
+Darkdrift uncertainty for readout-channel 3 = 0.303449
+Darkdrift uncertainty for readout-channel 4 = 0.302982
+Trimmed average of values in readout-channel 1 = 5.820023
+Trimmed average of values in readout-channel 2 = 5.901129
+Trimmed average of values in readout-channel 3 = 5.707141
+Trimmed average of values in readout-channel 4 = 6.007001
+Darkdrift background term = 5.858823
+...for data plane = 26
+Darkdrift correction for readout-channel 1 = -0.181685
+Darkdrift correction for readout-channel 2 = -0.070067
+Darkdrift correction for readout-channel 3 = 0.156643
+Darkdrift correction for readout-channel 4 = 0.095109
+Darkdrift uncertainty for readout-channel 1 = 0.305052
+Darkdrift uncertainty for readout-channel 2 = 0.302985
+Darkdrift uncertainty for readout-channel 3 = 0.303139
+Darkdrift uncertainty for readout-channel 4 = 0.303071
+Trimmed average of values in readout-channel 1 = 5.694731
+Trimmed average of values in readout-channel 2 = 5.806350
+Trimmed average of values in readout-channel 3 = 6.033060
+Trimmed average of values in readout-channel 4 = 5.971525
+Darkdrift background term = 5.876416
+...for data plane = 27
+Darkdrift correction for readout-channel 1 = -0.202540
+Darkdrift correction for readout-channel 2 = -0.165246
+Darkdrift correction for readout-channel 3 = 0.139938
+Darkdrift correction for readout-channel 4 = 0.227849
+Darkdrift uncertainty for readout-channel 1 = 0.302982
+Darkdrift uncertainty for readout-channel 2 = 0.302446
+Darkdrift uncertainty for readout-channel 3 = 0.303529
+Darkdrift uncertainty for readout-channel 4 = 0.340687
+Trimmed average of values in readout-channel 1 = 5.568092
+Trimmed average of values in readout-channel 2 = 5.605386
+Trimmed average of values in readout-channel 3 = 5.910570
+Trimmed average of values in readout-channel 4 = 5.998481
+Darkdrift background term = 5.770632
+...for data plane = 28
+Darkdrift correction for readout-channel 1 = -0.045522
+Darkdrift correction for readout-channel 2 = 0.003162
+Darkdrift correction for readout-channel 3 = 0.098417
+Darkdrift correction for readout-channel 4 = -0.056057
+Darkdrift uncertainty for readout-channel 1 = 0.302977
+Darkdrift uncertainty for readout-channel 2 = 0.303797
+Darkdrift uncertainty for readout-channel 3 = 0.304104
+Darkdrift uncertainty for readout-channel 4 = 0.302875
+Trimmed average of values in readout-channel 1 = 5.866623
+Trimmed average of values in readout-channel 2 = 5.915306
+Trimmed average of values in readout-channel 3 = 6.010561
+Trimmed average of values in readout-channel 4 = 5.856088
+Darkdrift background term = 5.912144
+...for data plane = 29
+Darkdrift correction for readout-channel 1 = -0.012964
+Darkdrift correction for readout-channel 2 = -0.309938
+Darkdrift correction for readout-channel 3 = 0.070586
+Darkdrift correction for readout-channel 4 = 0.252316
+Darkdrift uncertainty for readout-channel 1 = 0.303122
+Darkdrift uncertainty for readout-channel 2 = 0.303795
+Darkdrift uncertainty for readout-channel 3 = 0.302977
+Darkdrift uncertainty for readout-channel 4 = 0.304497
+Trimmed average of values in readout-channel 1 = 5.706455
+Trimmed average of values in readout-channel 2 = 5.409481
+Trimmed average of values in readout-channel 3 = 5.790004
+Trimmed average of values in readout-channel 4 = 5.971735
+Darkdrift background term = 5.719419
+...for data plane = 30
+Darkdrift correction for readout-channel 1 = -0.186483
+Darkdrift correction for readout-channel 2 = 0.041117
+Darkdrift correction for readout-channel 3 = 0.094479
+Darkdrift correction for readout-channel 4 = 0.050887
+Darkdrift uncertainty for readout-channel 1 = 0.303617
+Darkdrift uncertainty for readout-channel 2 = 0.302141
+Darkdrift uncertainty for readout-channel 3 = 0.303207
+Darkdrift uncertainty for readout-channel 4 = 0.302984
+Trimmed average of values in readout-channel 1 = 5.415177
+Trimmed average of values in readout-channel 2 = 5.642777
+Trimmed average of values in readout-channel 3 = 5.696139
+Trimmed average of values in readout-channel 4 = 5.652547
+Darkdrift background term = 5.601660
+...for data plane = 31
+Darkdrift correction for readout-channel 1 = 0.098433
+Darkdrift correction for readout-channel 2 = -0.162140
+Darkdrift correction for readout-channel 3 = -0.053952
+Darkdrift correction for readout-channel 4 = 0.117660
+Darkdrift uncertainty for readout-channel 1 = 0.302985
+Darkdrift uncertainty for readout-channel 2 = 0.303251
+Darkdrift uncertainty for readout-channel 3 = 0.303694
+Darkdrift uncertainty for readout-channel 4 = 0.302982
+Trimmed average of values in readout-channel 1 = 5.874410
+Trimmed average of values in readout-channel 2 = 5.613836
+Trimmed average of values in readout-channel 3 = 5.722024
+Trimmed average of values in readout-channel 4 = 5.893637
+Darkdrift background term = 5.775977
+...for data plane = 32
+Darkdrift correction for readout-channel 1 = 0.195428
+Darkdrift correction for readout-channel 2 = -0.202821
+Darkdrift correction for readout-channel 3 = -0.010496
+Darkdrift correction for readout-channel 4 = 0.017889
+Darkdrift uncertainty for readout-channel 1 = 0.303094
+Darkdrift uncertainty for readout-channel 2 = 0.302975
+Darkdrift uncertainty for readout-channel 3 = 0.303046
+Darkdrift uncertainty for readout-channel 4 = 0.303053
+Trimmed average of values in readout-channel 1 = 5.932275
+Trimmed average of values in readout-channel 2 = 5.534026
+Trimmed average of values in readout-channel 3 = 5.726351
+Trimmed average of values in readout-channel 4 = 5.754736
+Darkdrift background term = 5.736847
+...for data plane = 33
+Darkdrift correction for readout-channel 1 = -0.085965
+Darkdrift correction for readout-channel 2 = -0.178104
+Darkdrift correction for readout-channel 3 = 0.215766
+Darkdrift correction for readout-channel 4 = 0.048304
+Darkdrift uncertainty for readout-channel 1 = 0.302581
+Darkdrift uncertainty for readout-channel 2 = 0.302975
+Darkdrift uncertainty for readout-channel 3 = 0.302975
+Darkdrift uncertainty for readout-channel 4 = 0.303318
+Trimmed average of values in readout-channel 1 = 5.615271
+Trimmed average of values in readout-channel 2 = 5.523132
+Trimmed average of values in readout-channel 3 = 5.917002
+Trimmed average of values in readout-channel 4 = 5.749540
+Darkdrift background term = 5.701236
+...for data plane = 34
+Darkdrift correction for readout-channel 1 = 0.015650
+Darkdrift correction for readout-channel 2 = -0.161543
+Darkdrift correction for readout-channel 3 = 0.043400
+Darkdrift correction for readout-channel 4 = 0.102493
+Darkdrift uncertainty for readout-channel 1 = 0.303608
+Darkdrift uncertainty for readout-channel 2 = 0.302975
+Darkdrift uncertainty for readout-channel 3 = 0.303212
+Darkdrift uncertainty for readout-channel 4 = 0.302713
+Trimmed average of values in readout-channel 1 = 5.759845
+Trimmed average of values in readout-channel 2 = 5.582652
+Trimmed average of values in readout-channel 3 = 5.787595
+Trimmed average of values in readout-channel 4 = 5.846688
+Darkdrift background term = 5.744195
+...for data plane = 35
+Darkdrift correction for readout-channel 1 = -0.159433
+Darkdrift correction for readout-channel 2 = 0.078174
+Darkdrift correction for readout-channel 3 = -0.273156
+Darkdrift correction for readout-channel 4 = 0.354415
+Darkdrift uncertainty for readout-channel 1 = 0.303162
+Darkdrift uncertainty for readout-channel 2 = 0.303538
+Darkdrift uncertainty for readout-channel 3 = 0.302971
+Darkdrift uncertainty for readout-channel 4 = 0.302970
+Trimmed average of values in readout-channel 1 = 6.088369
+Trimmed average of values in readout-channel 2 = 6.325976
+Trimmed average of values in readout-channel 3 = 5.974646
+Trimmed average of values in readout-channel 4 = 6.602217
+Darkdrift background term = 6.247802
+...for data plane = 36
+Darkdrift correction for readout-channel 1 = -0.215010
+Darkdrift correction for readout-channel 2 = -0.321581
+Darkdrift correction for readout-channel 3 = 0.101550
+Darkdrift correction for readout-channel 4 = 0.435042
+Darkdrift uncertainty for readout-channel 1 = 0.302985
+Darkdrift uncertainty for readout-channel 2 = 0.302422
+Darkdrift uncertainty for readout-channel 3 = 0.302993
+Darkdrift uncertainty for readout-channel 4 = 0.303084
+Trimmed average of values in readout-channel 1 = 5.370582
+Trimmed average of values in readout-channel 2 = 5.264011
+Trimmed average of values in readout-channel 3 = 5.687142
+Trimmed average of values in readout-channel 4 = 6.020634
+Darkdrift background term = 5.585592
+...for data plane = 37
+Darkdrift correction for readout-channel 1 = 0.131701
+Darkdrift correction for readout-channel 2 = -0.248672
+Darkdrift correction for readout-channel 3 = 0.071520
+Darkdrift correction for readout-channel 4 = 0.045452
+Darkdrift uncertainty for readout-channel 1 = 0.303726
+Darkdrift uncertainty for readout-channel 2 = 0.302995
+Darkdrift uncertainty for readout-channel 3 = 0.303126
+Darkdrift uncertainty for readout-channel 4 = 0.302974
+Trimmed average of values in readout-channel 1 = 6.220550
+Trimmed average of values in readout-channel 2 = 5.840177
+Trimmed average of values in readout-channel 3 = 6.160368
+Trimmed average of values in readout-channel 4 = 6.134301
+Darkdrift background term = 6.088849
+...for data plane = 38
+Darkdrift correction for readout-channel 1 = 0.234716
+Darkdrift correction for readout-channel 2 = -0.174004
+Darkdrift correction for readout-channel 3 = 0.025051
+Darkdrift correction for readout-channel 4 = -0.085764
+Darkdrift uncertainty for readout-channel 1 = 0.302968
+Darkdrift uncertainty for readout-channel 2 = 0.302992
+Darkdrift uncertainty for readout-channel 3 = 0.303300
+Darkdrift uncertainty for readout-channel 4 = 0.303143
+Trimmed average of values in readout-channel 1 = 5.662151
+Trimmed average of values in readout-channel 2 = 5.253432
+Trimmed average of values in readout-channel 3 = 5.452487
+Trimmed average of values in readout-channel 4 = 5.341672
+Darkdrift background term = 5.427436
+...for data plane = 39
+Darkdrift correction for readout-channel 1 = 0.002251
+Darkdrift correction for readout-channel 2 = -0.356988
+Darkdrift correction for readout-channel 3 = 0.040280
+Darkdrift correction for readout-channel 4 = 0.314457
+Darkdrift uncertainty for readout-channel 1 = 0.304002
+Darkdrift uncertainty for readout-channel 2 = 0.302982
+Darkdrift uncertainty for readout-channel 3 = 0.303444
+Darkdrift uncertainty for readout-channel 4 = 0.303632
+Trimmed average of values in readout-channel 1 = 5.610822
+Trimmed average of values in readout-channel 2 = 5.251582
+Trimmed average of values in readout-channel 3 = 5.648850
+Trimmed average of values in readout-channel 4 = 5.923028
+Darkdrift background term = 5.608570
+...for data plane = 40
+Darkdrift correction for readout-channel 1 = -0.395757
+Darkdrift correction for readout-channel 2 = 0.574023
+Darkdrift correction for readout-channel 3 = -0.022948
+Darkdrift correction for readout-channel 4 = -0.155317
+Darkdrift uncertainty for readout-channel 1 = 0.302968
+Darkdrift uncertainty for readout-channel 2 = 0.304064
+Darkdrift uncertainty for readout-channel 3 = 0.303213
+Darkdrift uncertainty for readout-channel 4 = 0.302972
+Trimmed average of values in readout-channel 1 = 5.193715
+Trimmed average of values in readout-channel 2 = 6.163495
+Trimmed average of values in readout-channel 3 = 5.566524
+Trimmed average of values in readout-channel 4 = 5.434155
+Darkdrift background term = 5.589472
+...for data plane = 41
+Darkdrift correction for readout-channel 1 = -0.131825
+Darkdrift correction for readout-channel 2 = 0.206001
+Darkdrift correction for readout-channel 3 = -0.023808
+Darkdrift correction for readout-channel 4 = -0.050368
+Darkdrift uncertainty for readout-channel 1 = 0.302979
+Darkdrift uncertainty for readout-channel 2 = 0.303263
+Darkdrift uncertainty for readout-channel 3 = 0.375839
+Darkdrift uncertainty for readout-channel 4 = 0.302959
+Trimmed average of values in readout-channel 1 = 5.927364
+Trimmed average of values in readout-channel 2 = 6.265190
+Trimmed average of values in readout-channel 3 = 6.035382
+Trimmed average of values in readout-channel 4 = 6.008821
+Darkdrift background term = 6.059189
+...for data plane = 42
+Darkdrift correction for readout-channel 1 = 0.107993
+Darkdrift correction for readout-channel 2 = -0.082940
+Darkdrift correction for readout-channel 3 = -0.136903
+Darkdrift correction for readout-channel 4 = 0.111850
+Darkdrift uncertainty for readout-channel 1 = 0.303234
+Darkdrift uncertainty for readout-channel 2 = 0.304627
+Darkdrift uncertainty for readout-channel 3 = 0.303132
+Darkdrift uncertainty for readout-channel 4 = 0.302970
+Trimmed average of values in readout-channel 1 = 5.675593
+Trimmed average of values in readout-channel 2 = 5.484661
+Trimmed average of values in readout-channel 3 = 5.430697
+Trimmed average of values in readout-channel 4 = 5.679450
+Darkdrift background term = 5.567600
+...for data plane = 43
+Darkdrift correction for readout-channel 1 = -0.193682
+Darkdrift correction for readout-channel 2 = 0.041881
+Darkdrift correction for readout-channel 3 = 0.066260
+Darkdrift correction for readout-channel 4 = 0.085542
+Darkdrift uncertainty for readout-channel 1 = 0.303485
+Darkdrift uncertainty for readout-channel 2 = 0.301856
+Darkdrift uncertainty for readout-channel 3 = 0.302979
+Darkdrift uncertainty for readout-channel 4 = 0.227990
+Trimmed average of values in readout-channel 1 = 5.326840
+Trimmed average of values in readout-channel 2 = 5.562403
+Trimmed average of values in readout-channel 3 = 5.586783
+Trimmed average of values in readout-channel 4 = 5.606064
+Darkdrift background term = 5.520523
+...for data plane = 44
+Darkdrift correction for readout-channel 1 = -0.232583
+Darkdrift correction for readout-channel 2 = -0.264764
+Darkdrift correction for readout-channel 3 = 0.081865
+Darkdrift correction for readout-channel 4 = 0.415482
+Darkdrift uncertainty for readout-channel 1 = 0.302984
+Darkdrift uncertainty for readout-channel 2 = 0.300228
+Darkdrift uncertainty for readout-channel 3 = 0.303319
+Darkdrift uncertainty for readout-channel 4 = 0.303237
+Trimmed average of values in readout-channel 1 = 5.455487
+Trimmed average of values in readout-channel 2 = 5.423306
+Trimmed average of values in readout-channel 3 = 5.769935
+Trimmed average of values in readout-channel 4 = 6.103552
+Darkdrift background term = 5.688070
+...for data plane = 45
+Darkdrift correction for readout-channel 1 = 0.016124
+Darkdrift correction for readout-channel 2 = 0.312250
+Darkdrift correction for readout-channel 3 = -0.311040
+Darkdrift correction for readout-channel 4 = -0.017335
+Darkdrift uncertainty for readout-channel 1 = 0.377083
+Darkdrift uncertainty for readout-channel 2 = 0.303525
+Darkdrift uncertainty for readout-channel 3 = 0.302979
+Darkdrift uncertainty for readout-channel 4 = 0.302971
+Trimmed average of values in readout-channel 1 = 5.690428
+Trimmed average of values in readout-channel 2 = 5.986555
+Trimmed average of values in readout-channel 3 = 5.363265
+Trimmed average of values in readout-channel 4 = 5.656970
+Darkdrift background term = 5.674304
+...for data plane = 46
+Darkdrift correction for readout-channel 1 = 0.011018
+Darkdrift correction for readout-channel 2 = -0.193575
+Darkdrift correction for readout-channel 3 = 0.253174
+Darkdrift correction for readout-channel 4 = -0.070617
+Darkdrift uncertainty for readout-channel 1 = 0.303230
+Darkdrift uncertainty for readout-channel 2 = 0.302973
+Darkdrift uncertainty for readout-channel 3 = 0.302982
+Darkdrift uncertainty for readout-channel 4 = 0.302980
+Trimmed average of values in readout-channel 1 = 5.925065
+Trimmed average of values in readout-channel 2 = 5.720472
+Trimmed average of values in readout-channel 3 = 6.167221
+Trimmed average of values in readout-channel 4 = 5.843430
+Darkdrift background term = 5.914047
+...for data plane = 47
+Darkdrift correction for readout-channel 1 = 0.205905
+Darkdrift correction for readout-channel 2 = -0.158152
+Darkdrift correction for readout-channel 3 = -0.141569
+Darkdrift correction for readout-channel 4 = 0.093815
+Darkdrift uncertainty for readout-channel 1 = 0.303454
+Darkdrift uncertainty for readout-channel 2 = 0.302690
+Darkdrift uncertainty for readout-channel 3 = 0.303300
+Darkdrift uncertainty for readout-channel 4 = 0.302799
+Trimmed average of values in readout-channel 1 = 5.978732
+Trimmed average of values in readout-channel 2 = 5.614675
+Trimmed average of values in readout-channel 3 = 5.631257
+Trimmed average of values in readout-channel 4 = 5.866642
+Darkdrift background term = 5.772826
+...for data plane = 48
+Darkdrift correction for readout-channel 1 = 0.007796
+Darkdrift correction for readout-channel 2 = -0.040645
+Darkdrift correction for readout-channel 3 = 0.063154
+Darkdrift correction for readout-channel 4 = -0.030306
+Darkdrift uncertainty for readout-channel 1 = 0.302837
+Darkdrift uncertainty for readout-channel 2 = 0.302978
+Darkdrift uncertainty for readout-channel 3 = 0.303300
+Darkdrift uncertainty for readout-channel 4 = 0.376441
+Trimmed average of values in readout-channel 1 = 5.718910
+Trimmed average of values in readout-channel 2 = 5.670469
+Trimmed average of values in readout-channel 3 = 5.774267
+Trimmed average of values in readout-channel 4 = 5.680808
+Darkdrift background term = 5.711113
+...for data plane = 49
+Darkdrift correction for readout-channel 1 = 0.380452
+Darkdrift correction for readout-channel 2 = -0.428577
+Darkdrift correction for readout-channel 3 = -0.167431
+Darkdrift correction for readout-channel 4 = 0.215556
+Darkdrift uncertainty for readout-channel 1 = 0.302983
+Darkdrift uncertainty for readout-channel 2 = 0.303520
+Darkdrift uncertainty for readout-channel 3 = 0.303120
+Darkdrift uncertainty for readout-channel 4 = 0.303045
+Trimmed average of values in readout-channel 1 = 5.951433
+Trimmed average of values in readout-channel 2 = 5.142404
+Trimmed average of values in readout-channel 3 = 5.403550
+Trimmed average of values in readout-channel 4 = 5.786537
+Darkdrift background term = 5.570981
+...for data plane = 50
+Darkdrift correction for readout-channel 1 = -0.151947
+Darkdrift correction for readout-channel 2 = -0.572055
+Darkdrift correction for readout-channel 3 = 0.523837
+Darkdrift correction for readout-channel 4 = 0.200165
+Darkdrift uncertainty for readout-channel 1 = 0.302960
+Darkdrift uncertainty for readout-channel 2 = 0.302964
+Darkdrift uncertainty for readout-channel 3 = 0.302977
+Darkdrift uncertainty for readout-channel 4 = 0.303048
+Trimmed average of values in readout-channel 1 = 5.153982
+Trimmed average of values in readout-channel 2 = 4.733873
+Trimmed average of values in readout-channel 3 = 5.829766
+Trimmed average of values in readout-channel 4 = 5.506094
+Darkdrift background term = 5.305929
+...for data plane = 51
+Darkdrift correction for readout-channel 1 = 0.069312
+Darkdrift correction for readout-channel 2 = -0.104014
+Darkdrift correction for readout-channel 3 = 0.107208
+Darkdrift correction for readout-channel 4 = -0.072506
+Darkdrift uncertainty for readout-channel 1 = 0.302972
+Darkdrift uncertainty for readout-channel 2 = 0.378158
+Darkdrift uncertainty for readout-channel 3 = 0.303131
+Darkdrift uncertainty for readout-channel 4 = 0.302968
+Trimmed average of values in readout-channel 1 = 5.479544
+Trimmed average of values in readout-channel 2 = 5.306217
+Trimmed average of values in readout-channel 3 = 5.517439
+Trimmed average of values in readout-channel 4 = 5.337725
+Darkdrift background term = 5.410231
+...for data plane = 52
+Darkdrift correction for readout-channel 1 = -0.069359
+Darkdrift correction for readout-channel 2 = 0.323302
+Darkdrift correction for readout-channel 3 = -0.421096
+Darkdrift correction for readout-channel 4 = 0.167153
+Darkdrift uncertainty for readout-channel 1 = 0.302852
+Darkdrift uncertainty for readout-channel 2 = 0.304921
+Darkdrift uncertainty for readout-channel 3 = 0.302974
+Darkdrift uncertainty for readout-channel 4 = 0.303052
+Trimmed average of values in readout-channel 1 = 5.905482
+Trimmed average of values in readout-channel 2 = 6.298142
+Trimmed average of values in readout-channel 3 = 5.553745
+Trimmed average of values in readout-channel 4 = 6.141993
+Darkdrift background term = 5.974841
+...for data plane = 53
+Darkdrift correction for readout-channel 1 = -0.262792
+Darkdrift correction for readout-channel 2 = 0.006149
+Darkdrift correction for readout-channel 3 = 0.568680
+Darkdrift correction for readout-channel 4 = -0.312038
+Darkdrift uncertainty for readout-channel 1 = 0.303373
+Darkdrift uncertainty for readout-channel 2 = 0.303239
+Darkdrift uncertainty for readout-channel 3 = 0.376876
+Darkdrift uncertainty for readout-channel 4 = 0.302803
+Trimmed average of values in readout-channel 1 = 5.603771
+Trimmed average of values in readout-channel 2 = 5.872712
+Trimmed average of values in readout-channel 3 = 6.435243
+Trimmed average of values in readout-channel 4 = 5.554525
+Darkdrift background term = 5.866563
+...for data plane = 54
+Darkdrift correction for readout-channel 1 = 0.095199
+Darkdrift correction for readout-channel 2 = -0.590839
+Darkdrift correction for readout-channel 3 = 0.113269
+Darkdrift correction for readout-channel 4 = 0.382370
+Darkdrift uncertainty for readout-channel 1 = 0.303241
+Darkdrift uncertainty for readout-channel 2 = 0.302979
+Darkdrift uncertainty for readout-channel 3 = 0.303217
+Darkdrift uncertainty for readout-channel 4 = 0.303132
+Trimmed average of values in readout-channel 1 = 5.725167
+Trimmed average of values in readout-channel 2 = 5.039130
+Trimmed average of values in readout-channel 3 = 5.743237
+Trimmed average of values in readout-channel 4 = 6.012339
+Darkdrift background term = 5.629968
+...for data plane = 55
+Darkdrift correction for readout-channel 1 = 0.112806
+Darkdrift correction for readout-channel 2 = -0.100720
+Darkdrift correction for readout-channel 3 = 0.199649
+Darkdrift correction for readout-channel 4 = -0.211735
+Darkdrift uncertainty for readout-channel 1 = 0.302958
+Darkdrift uncertainty for readout-channel 2 = 0.302975
+Darkdrift uncertainty for readout-channel 3 = 0.303140
+Darkdrift uncertainty for readout-channel 4 = 0.303060
+Trimmed average of values in readout-channel 1 = 5.479536
+Trimmed average of values in readout-channel 2 = 5.266010
+Trimmed average of values in readout-channel 3 = 5.566379
+Trimmed average of values in readout-channel 4 = 5.154995
+Darkdrift background term = 5.366730
+...for data plane = 56
+Darkdrift correction for readout-channel 1 = 0.466470
+Darkdrift correction for readout-channel 2 = -0.338110
+Darkdrift correction for readout-channel 3 = -0.061318
+Darkdrift correction for readout-channel 4 = -0.067043
+Darkdrift uncertainty for readout-channel 1 = 0.303353
+Darkdrift uncertainty for readout-channel 2 = 0.302969
+Darkdrift uncertainty for readout-channel 3 = 0.302882
+Darkdrift uncertainty for readout-channel 4 = 0.302965
+Trimmed average of values in readout-channel 1 = 5.976107
+Trimmed average of values in readout-channel 2 = 5.171527
+Trimmed average of values in readout-channel 3 = 5.448319
+Trimmed average of values in readout-channel 4 = 5.442594
+Darkdrift background term = 5.509637
+...for data plane = 57
+Darkdrift correction for readout-channel 1 = 0.069297
+Darkdrift correction for readout-channel 2 = -0.368305
+Darkdrift correction for readout-channel 3 = -0.080310
+Darkdrift correction for readout-channel 4 = 0.379317
+Darkdrift uncertainty for readout-channel 1 = 0.302975
+Darkdrift uncertainty for readout-channel 2 = 0.302973
+Darkdrift uncertainty for readout-channel 3 = 0.303027
+Darkdrift uncertainty for readout-channel 4 = 0.303305
+Trimmed average of values in readout-channel 1 = 5.796464
+Trimmed average of values in readout-channel 2 = 5.358862
+Trimmed average of values in readout-channel 3 = 5.646857
+Trimmed average of values in readout-channel 4 = 6.106484
+Darkdrift background term = 5.727167
+...for data plane = 58
+Darkdrift correction for readout-channel 1 = -0.068595
+Darkdrift correction for readout-channel 2 = -0.315496
+Darkdrift correction for readout-channel 3 = 0.329712
+Darkdrift correction for readout-channel 4 = 0.054379
+Darkdrift uncertainty for readout-channel 1 = 0.303201
+Darkdrift uncertainty for readout-channel 2 = 0.303112
+Darkdrift uncertainty for readout-channel 3 = 0.303375
+Darkdrift uncertainty for readout-channel 4 = 0.303061
+Trimmed average of values in readout-channel 1 = 0.667688
+Trimmed average of values in readout-channel 2 = 0.420786
+Trimmed average of values in readout-channel 3 = 1.065994
+Trimmed average of values in readout-channel 4 = 0.790661
+Darkdrift background term = 0.736282
+...for data plane = 59
+Darkdrift correction for readout-channel 1 = 0.183991
+Darkdrift correction for readout-channel 2 = -0.085691
+Darkdrift correction for readout-channel 3 = -0.047524
+Darkdrift correction for readout-channel 4 = -0.050776
+Darkdrift uncertainty for readout-channel 1 = 0.302988
+Darkdrift uncertainty for readout-channel 2 = 0.302166
+Darkdrift uncertainty for readout-channel 3 = 0.302895
+Darkdrift uncertainty for readout-channel 4 = 0.302966
+Trimmed average of values in readout-channel 1 = 5.825194
+Trimmed average of values in readout-channel 2 = 5.555512
+Trimmed average of values in readout-channel 3 = 5.593679
+Trimmed average of values in readout-channel 4 = 5.590428
+Darkdrift background term = 5.641203
+...for data plane = 60
+Darkdrift correction for readout-channel 1 = 0.082245
+Darkdrift correction for readout-channel 2 = -0.212260
+Darkdrift correction for readout-channel 3 = 0.064006
+Darkdrift correction for readout-channel 4 = 0.066009
+Darkdrift uncertainty for readout-channel 1 = 0.305193
+Darkdrift uncertainty for readout-channel 2 = 0.304878
+Darkdrift uncertainty for readout-channel 3 = 0.302983
+Darkdrift uncertainty for readout-channel 4 = 0.303878
+Trimmed average of values in readout-channel 1 = 5.600519
+Trimmed average of values in readout-channel 2 = 5.306014
+Trimmed average of values in readout-channel 3 = 5.582281
+Trimmed average of values in readout-channel 4 = 5.584284
+Darkdrift background term = 5.518275
+...for data plane = 61
+Darkdrift correction for readout-channel 1 = 0.360599
+Darkdrift correction for readout-channel 2 = -0.520070
+Darkdrift correction for readout-channel 3 = 0.350199
+Darkdrift correction for readout-channel 4 = -0.190728
+Darkdrift uncertainty for readout-channel 1 = 0.303233
+Darkdrift uncertainty for readout-channel 2 = 0.302709
+Darkdrift uncertainty for readout-channel 3 = 0.303137
+Darkdrift uncertainty for readout-channel 4 = 0.302971
+Trimmed average of values in readout-channel 1 = 5.956682
+Trimmed average of values in readout-channel 2 = 5.076013
+Trimmed average of values in readout-channel 3 = 5.946282
+Trimmed average of values in readout-channel 4 = 5.405355
+Darkdrift background term = 5.596083
+...for data plane = 62
+Darkdrift correction for readout-channel 1 = 0.027363
+Darkdrift correction for readout-channel 2 = -0.264319
+Darkdrift correction for readout-channel 3 = -0.291794
+Darkdrift correction for readout-channel 4 = 0.528750
+Darkdrift uncertainty for readout-channel 1 = 0.302977
+Darkdrift uncertainty for readout-channel 2 = 0.302962
+Darkdrift uncertainty for readout-channel 3 = 0.302966
+Darkdrift uncertainty for readout-channel 4 = 0.302117
+Trimmed average of values in readout-channel 1 = 5.558090
+Trimmed average of values in readout-channel 2 = 5.266409
+Trimmed average of values in readout-channel 3 = 5.238933
+Trimmed average of values in readout-channel 4 = 6.059478
+Darkdrift background term = 5.530727
+...for data plane = 63
+Darkdrift correction for readout-channel 1 = -0.063246
+Darkdrift correction for readout-channel 2 = -0.484227
+Darkdrift correction for readout-channel 3 = 0.534656
+Darkdrift correction for readout-channel 4 = 0.012818
+Darkdrift uncertainty for readout-channel 1 = 0.302976
+Darkdrift uncertainty for readout-channel 2 = 0.303808
+Darkdrift uncertainty for readout-channel 3 = 0.303038
+Darkdrift uncertainty for readout-channel 4 = 0.303055
+Trimmed average of values in readout-channel 1 = 5.576115
+Trimmed average of values in readout-channel 2 = 5.155134
+Trimmed average of values in readout-channel 3 = 6.174017
+Trimmed average of values in readout-channel 4 = 5.652179
+Darkdrift background term = 5.639361
+...for data plane = 64
+Darkdrift correction for readout-channel 1 = -0.064110
+Darkdrift correction for readout-channel 2 = 0.128547
+Darkdrift correction for readout-channel 3 = -0.010368
+Darkdrift correction for readout-channel 4 = -0.054069
+Darkdrift uncertainty for readout-channel 1 = 0.302978
+Darkdrift uncertainty for readout-channel 2 = 0.304351
+Darkdrift uncertainty for readout-channel 3 = 0.302988
+Darkdrift uncertainty for readout-channel 4 = 0.303223
+Trimmed average of values in readout-channel 1 = 5.450126
+Trimmed average of values in readout-channel 2 = 5.642784
+Trimmed average of values in readout-channel 3 = 5.503869
+Trimmed average of values in readout-channel 4 = 5.460168
+Darkdrift background term = 5.514237
+
+Program darkdrift: Status Message: 0x0000
+Normal exit from Function 0x0000: LOG_WRITER
+darkdrift Warning: NaN's were produced in the results.
+A total of     2013   NaN's were produced in the results.
+Processing time: 12.840000 seconds
+Current date/time: Sat Jan  9 14:58:09 2016
+Program darkdrift, version 4.1, terminated.
+
+darkdrift   exit_value =   0    execution_time = 12.930s
+******************************************************************
+Pipeline executing flatap
+flatap -i darkdrift.fits -p cal/pmask.fits -f cal/skyflat.fits -ui sig_darkdrift.fits -uo sig_flatap.fits -d dmask.fits -o flatap.fits -c cal/skyflat_cmask.fits 
+******************************************************************
+Pipeline Module FLATAP Version 1.5
+Processing time Sat Jan  9 14:58:09 2016
+
+flatap_parse_namelist: Information only: Namelist not specified.
+Sat Jan  9 14:58:09 2016
+flatap_log_writer: Could not open Log File, using stdout
+Flatap Version 1.5
+Namelist File  = 
+Input DCE = darkdrift.fits
+Output DCE = !flatap.fits
+Flatfield = cal/skyflat.fits
+Input Uncertainty = sig_darkdrift.fits
+Output Uncertainty = !sig_flatap.fits
+Pmask File = cal/pmask.fits
+Pmask Mask = 128
+Dmask File = dmask.fits
+Dmask Mask = 16384
+Cmask File = cal/skyflat_cmask.fits
+Cmask Mask = 256
+Trans CAL File = 
+Trans CAL CMask File = 
+Processing Log File = 
+Time =    0.21 seconds
+*********************
+
+Time = 0.210 seconds
+exit code 0
+
+flatap   exit_value =   0    execution_time = 0.300s
+******************************************************************
+Pipeline executing imfliprot
+imfliprot -i flatap.fits -n cdf/pn107.nl -a /sos/sw/S19.2.0/STUDIO/downlink/include -o imfliprot.fits 
+******************************************************************
+
+imfliprot_log_writer: Printing Log output to stdout
+
+Program imfliprot, Version 1.0
+Namelist File  = cdf/pn107.nl
+Input File = flatap.fits
+Output File = imfliprot.fits
+Image has been flipped
+Image Rotation (degrees)  = 180
+Ancillary Data-File Path = /sos/sw/S19.2.0/STUDIO/downlink/include
+Verbose flag = 0
+Debug flag = 0
+imfliprot Status Message      0x0000: Normal exit from Function 0x0000: LOG_WRITER
+Processing time: 0.220000 seconds
+Current date/time: Sat Jan  9 14:58:10 2016
+Program imfliprot, version 1.0, terminated.
+
+
+imfliprot   exit_value =   0    execution_time = 0.270s
+******************************************************************
+Pipeline executing imfliprot
+imfliprot -i sig_flatap.fits -n cdf/pn107.nl -a /sos/sw/S19.2.0/STUDIO/downlink/include -o sig_imfliprot.fits 
+******************************************************************
+
+imfliprot_log_writer: Printing Log output to stdout
+
+Program imfliprot, Version 1.0
+Namelist File  = cdf/pn107.nl
+Input File = sig_flatap.fits
+Output File = sig_imfliprot.fits
+Image has been flipped
+Image Rotation (degrees)  = 180
+Ancillary Data-File Path = /sos/sw/S19.2.0/STUDIO/downlink/include
+Verbose flag = 0
+Debug flag = 0
+imfliprot Status Message      0x0000: Normal exit from Function 0x0000: LOG_WRITER
+Processing time: 0.270000 seconds
+Current date/time: Sat Jan  9 14:58:11 2016
+Program imfliprot, version 1.0, terminated.
+
+
+imfliprot   exit_value =   0    execution_time = 0.310s
+******************************************************************
+Pipeline executing imfliprot
+imfliprot -i dmask.fits -n cdf/pn107.nl -a /sos/sw/S19.2.0/STUDIO/downlink/include -o temp_dmask.fits 
+******************************************************************
+
+imfliprot_log_writer: Printing Log output to stdout
+
+Program imfliprot, Version 1.0
+Namelist File  = cdf/pn107.nl
+Input File = dmask.fits
+Output File = temp_dmask.fits
+Image has been flipped
+Image Rotation (degrees)  = 180
+Ancillary Data-File Path = /sos/sw/S19.2.0/STUDIO/downlink/include
+Verbose flag = 0
+Debug flag = 0
+imfliprot Status Message      0x0000: Normal exit from Function 0x0000: LOG_WRITER
+Processing time: 0.060000 seconds
+Current date/time: Sat Jan  9 14:58:11 2016
+Program imfliprot, version 1.0, terminated.
+
+
+imfliprot   exit_value =   0    execution_time = 0.100s
+******************************************************************
+Pipeline executing imfliprot
+imfliprot -i fowlinearize.fits -n cdf/pn107.nl -a /sos/sw/S19.2.0/STUDIO/downlink/include -o temp_fowlinearize.fits 
+******************************************************************
+
+imfliprot_log_writer: Printing Log output to stdout
+
+Program imfliprot, Version 1.0
+Namelist File  = cdf/pn107.nl
+Input File = fowlinearize.fits
+Output File = temp_fowlinearize.fits
+Image has been flipped
+Image Rotation (degrees)  = 180
+Ancillary Data-File Path = /sos/sw/S19.2.0/STUDIO/downlink/include
+Verbose flag = 0
+Debug flag = 0
+imfliprot Status Message      0x0000: Normal exit from Function 0x0000: LOG_WRITER
+Processing time: 0.140000 seconds
+Current date/time: Sat Jan  9 14:58:12 2016
+Program imfliprot, version 1.0, terminated.
+
+
+imfliprot   exit_value =   0    execution_time = 0.190s
+******************************************************************
+Pipeline executing imfliprot
+imfliprot -i sig_fowlinearize.fits -n cdf/pn107.nl -a /sos/sw/S19.2.0/STUDIO/downlink/include -o temp_sig_fowlinearize.fits 
+******************************************************************
+
+imfliprot_log_writer: Printing Log output to stdout
+
+Program imfliprot, Version 1.0
+Namelist File  = cdf/pn107.nl
+Input File = sig_fowlinearize.fits
+Output File = temp_sig_fowlinearize.fits
+Image has been flipped
+Image Rotation (degrees)  = 180
+Ancillary Data-File Path = /sos/sw/S19.2.0/STUDIO/downlink/include
+Verbose flag = 0
+Debug flag = 0
+imfliprot Status Message      0x0000: Normal exit from Function 0x0000: LOG_WRITER
+Processing time: 0.110000 seconds
+Current date/time: Sat Jan  9 14:58:12 2016
+Program imfliprot, version 1.0, terminated.
+
+
+imfliprot   exit_value =   0    execution_time = 0.150s
+******************************************************************
+Pipeline executing dntoflux
+dntoflux -i imfliprot.fits -iu sig_imfliprot.fits -n cdf/pn107.nl -co 0 -c 0.1447 -u 0.0000 -a /sos/sw/S19.2.0/STUDIO/downlink/include -o1 dntoflux.fits -ou sig_dntoflux.fits -t 1 
+******************************************************************
+
+Program dntoflux, Version 4.2
+Namelist File  = cdf/pn107.nl
+Input Image = imfliprot.fits
+Output File 1 = dntoflux.fits
+Output Uncertainty Image = sig_dntoflux.fits
+Operation flag = 0
+Conversion factor = 0.144700
+Input Uncertainty Image = sig_imfliprot.fits
+Conversion-factor uncertainty = 0.000000
+Output BUNIT setting = MJy/sr
+Normalize-by-EXPTIME Flag = 1
+EXPTIME = 1.920000
+Data-Plane Flag = 1
+Ancillary Data-File Path = /sos/sw/S19.2.0/STUDIO/downlink/include
+Verbose flag = 0
+Super-verbose flag = 0
+Debug flag = 0
+Terminating data-units-conversion program.
+dntoflux Status Message: 0x0000
+Normal exit from Function 0x0000: LOG_WRITER
+dntoflux Probs Warning: NaN's were produced in the results.
+A total of     4026   NaN's were produced in the results.
+Processing time: 0.570000 seconds
+Current date/time: Sat Jan  9 14:58:14 2016
+Program dntoflux, version 4.2, terminated.
+
+dntoflux   exit_value =   0    execution_time = 0.730s
+******************************************************************
+Pipeline executing qatool
+qatool -i dntoflux.fits -n cdf/pn107.nl -nb QATOOLBCD -a /sos/sw/S19.2.0/STUDIO/downlink/include -o qa/BCD_qatool 
+******************************************************************
+qatool_parse_namelist: Information only: Namelist block-name = &QATOOLBCD
+Program qatool, Version 6.0
+Namelist File  = cdf/pn107.nl
+Input File = dntoflux.fits
+Output Data Filename Base = qa/BCD_qatool
+Statistics Group = 0
+Percent-Scaling Flag = 0
+Calculation Type = 1
+(set-up to do additional computations for four readout channels)
+Number of Mean Absolute Deviations for Histogram Half-Width Coverage = 5
+Number of Bins in Histograms = 41
+Central fraction for trimmed average = 0.810000
+Central fraction for trimmed std. dev. = 0.720000
+Bad-pixel tolerance fraction = 0.900000
+Statistics Box X position = 3
+Statistics Box Y position = 4
+Statistics Box X width = 20
+Statistics Box Y height = 23
+Input-Image Transpose Flag = 1
+Unsigned Integer Flag = 0
+Data-Plane Flag = 1
+Number Edge Rows/Cols Skipped = 2
+Keyword Prefix = bcd
+Ancillary Data-File Path = /sos/sw/S19.2.0/STUDIO/downlink/include
+Verbose flag = 0
+Super-verbose flag = 0
+Debug flag = 0
+Performed statistical and histogram calculations.
+Program qatool: Status Message: 0x0000
+Normal exit from Function 0x0000: LOG_WRITER
+Processing time: 1.590000 seconds
+Current date/time: Sat Jan  9 14:58:16 2016
+Program qatool, version 6.0, terminated.
+
+qatool   exit_value =   0    execution_time = 1.700s
+******************************************************************
+Pipeline executing chkmask
+chkmask dmask.fits -q qa/BCD_qatool.qa 
+******************************************************************
+ chkmask vsn 1.35 A40312
+ 
+ No. of occurrences of the   3 status combinations:
+   2267 occurrences of   256 (8)                                 
+   9 occurrences of   16 (4)                                 
+   2 occurrences of   272 (4,8)                               
+ 
+ Status Bit: No. of Pixels
+   0:   0
+   1:   0
+   2:   0
+   3:   0
+   4:   11
+   5:   0
+   6:   0
+   7:   0
+   8:   2269
+   9:   0
+   10:   0
+   11:   0
+   12:   0
+   13:   0
+   14:   0
+ 
+
+chkmask   exit_value =   0    execution_time = 0.340s
+******************************************************************
+Loading QA information for DCE and BCD product
+Keyword APDUV1E not found in header
+Keyword APDUV2E not found in header
+Keyword APDUV3E not found in header
+Keyword APDUI1E not found in header
+Keyword APDUI2E not found in header
+Keyword APDUI3E not found in header
+Could not append keyword APDUV1E to QA file qa/DCE_qatool.qa
+Could not append keyword APDUV2E to QA file qa/DCE_qatool.qa
+Could not append keyword APDUV3E to QA file qa/DCE_qatool.qa
+Could not append keyword APDUI1E to QA file qa/DCE_qatool.qa
+Could not append keyword APDUI2E to QA file qa/DCE_qatool.qa
+Could not append keyword APDUI3E to QA file qa/DCE_qatool.qa
+******************************************************************
+Pipeline executing qaloader
+qaloader -i qa/DCE_qatool.qa -tablename qa_iracdce -o qa/qaloader.sql -role pipelineswrole 
+******************************************************************
+2016/01/09 14:58:19 BEGIN qaloader v1.13
+ -i (QA_FILE) qa/DCE_qatool.qa
+ -tablename (TABLENAME) qa_iracdce
+ -o (SQL_FILE) qa/qaloader.sql
+ -role (ROLE) pipelineswrole
+Using metadata version 13.0b
+table name=qa_iracdce
+
+QA values ingested:
+{-4.613816e+01} {}
+dceAveFI_1       -4.613816e+01 
+{-4.932864e+01} {}
+dceAveR1_1       -4.932864e+01 
+{-2.939306e+01} {}
+dceAveR2_1       -2.939306e+01 
+{-3.308726e+01} {}
+dceAveR3_1       -3.308726e+01 
+{-7.274368e+01} {}
+dceAveR4_1       -7.274368e+01 
+{-2.300000e+01} {-4.932864e+01}
+dceMedFI_1       -2.300000e+01 
+{3.057943e+02} {}
+dceSdevFI_1      3.057943e+02 
+{4.770400e+00} {}
+dceDSclFI_1      4.770400e+00 
+{-8.860000e+03} {}
+dceMinFI_1       -8.860000e+03 
+{1.800000e+01} {}
+dceMaxFI_1       1.800000e+01 
+{147809598} {}
+DCEID            147809598 
+{2} {-4.613816e+01}
+CHNLNUM          2 
+{0} {}
+ADCEID           0 
+{8} {}
+AFOWLNUM         8 
+{184} {}
+AWAITPER         184 
+{0} {}
+AWEASIDE         0 
+{1} {}
+AREADMOD         1 
+{27.699513} {}
+AFPAT1B          27.699513 
+{28.669623} {}
+AFPAT2B          28.669623 
+{0} {}
+APEDSIG          0 
+{0} {}
+ATXSTAT          0 
+{0} {}
+AFLSTAT          0 
+{4} {}
+ASHSTAT          4 
+{-3.5585} {}
+AVRSTBEG         -3.5585 
+{-3.056874} {}
+AVDETBEG         -3.056874 
+{-3.618536} {}
+AVGG1BEG         -3.618536 
+{-3.550644} {}
+AVDDUBEG         -3.550644 
+{0} {}
+AVGGCBEG         0 
+{21.077832} {}
+ACTENDT          21.077832 
+{19.314394} {}
+AFPECTE          19.314394 
+{22.64813} {}
+AFPEATE          22.64813 
+{23.546779} {}
+ATCTEMPE         23.546779 
+{21.047351} {}
+ACETEMPE         21.047351 
+{20.98639} {}
+APDTEMPE         20.98639 
+{27.671961} {}
+ACATMP2E         27.671961 
+2016/01/09 14:58:19 END   qaloader status=0
+
+qaloader   exit_value =   0    execution_time = 0.090s
+******************************************************************
+Pipeline executing qaloader
+qaloader -i qa/BCD_qatool.qa -tablename qa_iracdp -o qa/qaloader.sql 
+******************************************************************
+2016/01/09 14:58:20 BEGIN qaloader v1.13
+ -i (QA_FILE) qa/BCD_qatool.qa
+ -tablename (TABLENAME) qa_iracdp
+ -o (SQL_FILE) qa/qaloader.sql
+Using metadata version 13.0b
+table name=qa_iracdp
+
+QA values ingested:
+{2.554377e+00} {}
+bcdAveFI_1       2.554377e+00 
+{4.028793e+00} {}
+bcdAveUB_1       4.028793e+00 
+{5.675914e-01} {}
+bcdMedFI_1       5.675914e-01 
+{6.910838e-01} {}
+bcdMedUB_1       6.910838e-01 
+{2.593796e+01} {}
+bcdSdevFI_1      2.593796e+01 
+{3.379830e+01} {}
+bcdSdevUB_1      3.379830e+01 
+{4.369890e-01} {}
+bcdDSclFI_1      4.369890e-01 
+{5.176108e-01} {}
+bcdDSclUB_1      5.176108e-01 
+{-1.277694e+00} {}
+bcdMinFI_1       -1.277694e+00 
+{-3.811161e-01} {}
+bcdMinUB_1       -3.811161e-01 
+{6.876393e+02} {}
+bcdMaxFI_1       6.876393e+02 
+{6.876393e+02} {}
+bcdMaxUB_1       6.876393e+02 
+{5.554753e-01} {}
+bcdC68lFI_1      5.554753e-01 
+{6.038691e-01} {}
+bcdC68uFI_1      6.038691e-01 
+{391693040} {}
+DPID             391693040 
+{2} {2.554377e+00}
+CHNLNUM          2 
+2016/01/09 14:58:20 END   qaloader status=0
+
+qaloader   exit_value =   0    execution_time = 0.140s
+******************************************************************
+Pipeline executing dbaccess
+dbaccess -e sodb qa/qaloader.sql 
+******************************************************************
+set role pipelineswrole;
+set lock mode to wait 30;
+EXECUTE PROCEDURE addQA_iracdce (147809598, NULL, NULL, 2, -4.613816e+01, 
+-2.300000e+01, -4.932864e+01, -2.939306e+01, -3.308726e+01, -7.274368e+01, 
+3.057943e+02, 4.770400e+00, -8.860000e+03, 1.800000e+01, 0, 8, 184, 0, 1, 
+27.699513, 28.669623, 0, 0, 0, 4, -3.5585, -3.056874, -3.618536, -3.550644, 0, 
+21.077832, 19.314394, 22.64813, 23.546779, 21.047351, 20.98639, 27.671961, 
+NULL, NULL, NULL, NULL, NULL, NULL);
+EXECUTE PROCEDURE addQA_iracdp (391693040, NULL, NULL, 2, 2.554377e+00, 
+4.028793e+00, 5.675914e-01, 6.910838e-01, 2.593796e+01, 3.379830e+01, 
+4.369890e-01, 5.176108e-01, -1.277694e+00, -3.811161e-01, 6.876393e+02, 
+6.876393e+02, 5.554753e-01, 6.038691e-01, NULL, NULL, NULL, NULL, NULL, NULL);
+execute procedure setDceTimeParameters (147809598, 1037061168.283, "2012-11-11 00:26:27.957", 1.92, 2.00);
+
+dbaccess   exit_value =   0    execution_time = 0.150s
+******************************************************************
+Finishing IRAC science pipeline processing
+Could not copy cal/firstframe_corr.fits to /sbx20/S19.2.0/archive/proc/full/IRAC033400/bcd/4568/0046471424/2/0176/0000/17/01/1/cal/firstframe_corr.fits
+Could not copy imask.fits to /sbx20/S19.2.0/archive/proc/full/IRAC033400/bcd/4568/0046471424/2/0176/0000/17/01/1/imask.fits
+Could not copy muxbleedcorr.fits to /sbx20/S19.2.0/archive/proc/full/IRAC033400/bcd/4568/0046471424/2/0176/0000/17/01/1/muxbleedcorr.fits
+Could not copy slremove.fits to /sbx20/S19.2.0/archive/proc/full/IRAC033400/bcd/4568/0046471424/2/0176/0000/17/01/1/slremove.fits
+******************************************************************
+PlScriptID 17 exiting Saturday, January  9, 2016  2:58:23 PM PST
+Host: sopipe61
+Local Processing Directory: /scr2/S19.2.0/IRAC033400/bcd/4568/0046471424/2/0176/0000/17/01/1
+Sandbox Directory: /sbx20/S19.2.0/archive/proc/full/IRAC033400/bcd/4568/0046471424/2/0176/0000/17/01/1
+Processing time: total 32.42 s (user 1.07, system 1.06, child user 18.79, child system 11.5)
+Pipeline exit code: Normal exit (0)
+******************************************************************
